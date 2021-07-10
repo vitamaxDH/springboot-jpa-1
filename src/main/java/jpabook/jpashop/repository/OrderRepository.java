@@ -101,5 +101,19 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    // order 가 orderItem 만큼 늘어난다.
+    // 따라서 distinct
+    // fetch 는 Collection 할 경우 (To Many) 1개만 사용
+    // paging 은 불가능
+    public List<Order> findAllWithItem(){
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class
+        ).getResultList();
+    }
+
 }
 
