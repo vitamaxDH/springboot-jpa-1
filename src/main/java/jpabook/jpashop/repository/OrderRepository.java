@@ -101,6 +101,16 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member" +
+                        " join fetch o.delivery", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     // order 가 orderItem 만큼 늘어난다.
     // 따라서 distinct
     // fetch 는 Collection 할 경우 (To Many) 1개만 사용
