@@ -99,6 +99,7 @@ public class OrderRepository {
                         " join fetch o.member" +
                         " join fetch o.delivery", Order.class
         ).getResultList();
-
     }
+
 }
+
